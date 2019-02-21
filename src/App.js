@@ -1,14 +1,6 @@
 import React from 'react';
 import TodoForm from './components/TodoComponents/TodoForm';
-
-const todoList = [
-  {
-    task: '',
-    id: '',
-    completed: '',
-
-  }
-];
+import TodoList from './components/TodoComponents/TodoList';
 
 
 class App extends React.Component {
@@ -18,19 +10,55 @@ class App extends React.Component {
 constructor () {
   super ();
   this.state = {
-    todoList: todoList,
-    task: '',
-    id: '',
-    completed: '',
+    todos: [ 
+      {
+        task: 'Organize Garage',
+        id: 1528817077286,
+        completed: false
+      },
+      {
+        task: 'Bake Cookies',
+        id: 1528817084358,
+        completed: false
+      }
+  ],
+  todo: ""
   };
 }
 
+// setState with new todo at the end of the array
+
+addTodo = e => {
+  e.preventDefault (); // Prevents browser refresh on button click
+  const newTodo = {
+    task: this.state.todo,
+    id: Date.now(),
+    completed: false
+  }
+  this.setState({
+    todos: [...this.state.todos, newTodo],
+    todo: ''
+  })
+};
+  handleChanges = e => {
+    console.log(e.target);
+    this.setState ({
+      [e.target.name]: e.target.value
+    });
+  };
 
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
-        <TodoForm />
+        <TodoList 
+          todos={this.state.todos}
+        />
+        <TodoForm 
+          handleAddTodo={this.addTodo}
+          value={this.state.todo}
+          changeTodo={this.handleChanges}
+        />
       </div>
     );
   }
