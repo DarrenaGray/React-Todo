@@ -13,7 +13,6 @@ const TodoForm = props => {
 
                  />
                 <button>Add Todo</button>
-                <button>Clear Completed</button>
              </form>
       </div>
     )

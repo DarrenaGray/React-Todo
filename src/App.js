@@ -65,6 +65,13 @@ addTodo = e => {
     })
   }
 
+  clearCompleted = e => {
+    e.preventDefault();
+    this.setState({
+      todos: this.state.todos.filter(todo => !todo.completed)
+    })
+  }
+
   render() {
     return (
       <div>
@@ -78,6 +85,7 @@ addTodo = e => {
           value={this.state.todo}
           changeTodo={this.handleChanges}
         />
+        <button onClick={this.clearCompleted}>Clear Completed</button>
       </div>
     );
   }
