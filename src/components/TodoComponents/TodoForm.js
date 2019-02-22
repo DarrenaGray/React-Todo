@@ -3,7 +3,7 @@ import React from 'react';
 const TodoForm = props => {
     return (
         <div>
-            <form>
+            <form onSubmit={props.handleAddTodo}>
                 <input 
                 type="text"
                 value={props.value}
@@ -12,7 +12,7 @@ const TodoForm = props => {
                 placeholder="todo"
 
                  />
-                <button onClick={props.handleAddTodo}>Add Todo</button>
+                <button>Add Todo</button>
                 <button>Clear Completed</button>
              </form>
       </div>

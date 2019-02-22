@@ -3,6 +3,20 @@ import TodoForm from './components/TodoComponents/TodoForm';
 import TodoList from './components/TodoComponents/TodoList';
 
 
+const todos =[
+  {
+    task: 'Organize Garage',
+    id: 1528817077286,
+    completed: false
+  },
+  {
+    task: 'Bake Cookies',
+    id: 1528817084358,
+    completed: false
+  }
+
+]
+
 class App extends React.Component {
   // you will need a place to store your state in this component.
   // design `App` to be the parent component of your application.
@@ -10,19 +24,8 @@ class App extends React.Component {
 constructor () {
   super ();
   this.state = {
-    todos: [ 
-      {
-        task: 'Organize Garage',
-        id: 1528817077286,
-        completed: false
-      },
-      {
-        task: 'Bake Cookies',
-        id: 1528817084358,
-        completed: false
-      }
-  ],
-  todo: ""
+    todos: todos,
+    todo: ""
   };
 }
 
@@ -40,6 +43,7 @@ addTodo = e => {
     todo: ''
   })
 };
+
   handleChanges = e => {
     console.log(e.target);
     this.setState ({
@@ -47,12 +51,27 @@ addTodo = e => {
     });
   };
 
+  toggleItem = todoId => {
+    this.setState({
+      todos: this.state.todos.map(todo => {
+        if (todoId === todo.id) {
+          return {
+            ...todo,
+            completed: !todo.completed
+          };
+        }
+        return todo;
+      })
+    })
+  }
+
   render() {
     return (
       <div>
         <h2>Welcome to your Todo App!</h2>
         <TodoList 
           todos={this.state.todos}
+          toggleItem={this.toggleItem}
         />
         <TodoForm 
           handleAddTodo={this.addTodo}
